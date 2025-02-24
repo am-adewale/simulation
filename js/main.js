@@ -36,8 +36,8 @@ function saveMessageToHistory(message) {
 async function handleUserInput() {
   const message = userInput.value.trim();
   if (!message) return;
-  
-  // Add the user message.
+
+  // Add the user message to the chat.
   addMessageToChat(chatWindow, message, 'user');
 
   // Hide quick prompts immediately.
@@ -51,44 +51,59 @@ async function handleUserInput() {
     headerSection.classList.add('hidden');
     firstQuestionSet = true;
   }
-  
+
   // Clear and refocus the input.
   userInput.value = '';
   userInput.focus();
-  
+
   // Disable the submit button to prevent duplicates.
   submitBtn.disabled = true;
-  
+
   // Show a loader.
   const loader = showLoader(chatWindow);
-  
-  // Get the AI response.
-  const rawResponse = await getAIResponse(message);
-  loader.remove();
-  submitBtn.disabled = false;
-  
-  const aiText = formatAIResponse(rawResponse);
-  addMessageToChat(chatWindow, aiText, 'ai');
+
+  try {
+    // Get the AI response.
+    const rawResponse = await getAIResponse(message);
+    const aiText = formatAIResponse(rawResponse);
+
+    // Remove loader and enable the button.
+    loader.remove();
+    submitBtn.disabled = false;
+
+    // Add AI response to the chat.
+    addMessageToChat(chatWindow, aiText, 'ai');
+  } catch (error) {
+    loader.remove();
+    submitBtn.disabled = false;
+    console.error("Error while getting AI response:", error);
+    addMessageToChat(chatWindow, "Sorry, there was an error processing your request. Please try again.", 'ai');
+  }
 }
 
 // Event listeners.
 submitBtn.addEventListener('click', handleUserInput);
+
 userInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) {
     e.preventDefault();
     handleUserInput();
   }
 });
+
 userInput.addEventListener('input', () => {
   // Hide prompts when the user starts typing.
   if (!promptsContainer.classList.contains('hidden')) {
     promptsContainer.classList.add('hidden');
   }
 });
+
+// Handle prompt card clicks.
 promptCards.forEach((card) => {
   card.addEventListener('click', () => {
     const promptText = card.querySelector('p').textContent.trim();
     userInput.value = promptText;
+
     if (!promptsContainer.classList.contains('hidden')) {
       promptsContainer.classList.add('hidden');
     }

@@ -29,8 +29,13 @@ export function addMessageToChat(chatWindow, text, sender) {
     copyBtn.title = 'Copy';
     copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
     copyBtn.addEventListener('click', () => {
-      copyToClipboard(text);
-      alert('AI response copied!');
+      try {
+        copyToClipboard(text);
+        alert('AI response copied!');
+      } catch (error) {
+        console.error('Error copying to clipboard:', error);
+        alert('Failed to copy the AI response.');
+      }
     });
     actionsDiv.appendChild(copyBtn);
 
@@ -70,6 +75,7 @@ export function addMessageToChat(chatWindow, text, sender) {
     // For user messages, display text directly.
     msgContent.textContent = text;
   }
+
   chatWindow.appendChild(msgDiv);
   chatWindow.scrollTop = chatWindow.scrollHeight;
 }

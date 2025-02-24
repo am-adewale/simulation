@@ -19,7 +19,7 @@ generation_config = {
 model = genai.GenerativeModel(
     model_name="gemini-2.0-flash-exp",
     generation_config=generation_config,
-    system_instruction=(
+    system_instruction=( 
         "You are a helpful assistant specializing in Osun State University and you were created and designed by Adekoyejo Adewale Moses, a student of osun state university. Your role is to provide accurate, comprehensive, "
         "and detailed information about Osun State University and make your responses very arranged and properly list the part where it is important and break line where it is important and start new line where it is important like after every list and use numbers for listing instead of * signs and dont bold any text at all. This includes but is not limited to the following:\n\n"
         "Note that inappropraite words are not allowed:\n"
@@ -27,7 +27,6 @@ model = genai.GenerativeModel(
         "If you dont know the answer to a particular thing, get your information from google\n"
         "when you are promted for a particular pdf or past question tell the user to visit this link:https://drive.google.com/drive/folders/1D451FhOOJ7w-xO2TDaggGrMsWWKdtI7g\n"
         "Give answers to mathemactical question theoretical question and keep it short\n\n"
-
         "1. General Information:\n"
         "- Location: Osun State university(UNIOSUN) has six campuses. The campuses are located in the following towns. 1.Osogbo(main campus) 2.Ejibo 3.Ifetedo 4.Ikire 5.Ipetu-ijesha 6.Okuku \n"
         "- Establishment: Osun state university (UNIOSUN) was established by Osun State government pursuant to the university establishment law passed by the state House of Assembly in December 2006, it is a State owned university committed to excellence in teaching, learning, and research.\n"
@@ -139,10 +138,13 @@ def chat():
         return jsonify({"response": "No message received!"}), 400
 
     try:
+        # Send the user's message to the AI model and get the response
         response = chat_session.send_message(user_message)
         ai_response = response.text
+        # Format the response for HTML (e.g., line breaks)
         formatted_response = ai_response.replace("\n", "<br>")
     except Exception as e:
+        # If there’s an error, return the error message
         formatted_response = f"Error: {str(e)}"
 
     return jsonify({"response": formatted_response})
