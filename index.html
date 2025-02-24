@@ -7,7 +7,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <!-- External Styles -->
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
   <div class="app-container">
@@ -18,12 +18,14 @@
 
     <div class="chatbot-container">
       <!-- History Sidebar -->
-      <aside class="history-box">
+      <aside id="history-sidebar" class="history-box">
+        <button class="close-history" id="close-history">&times;</button>
         <h3>Search History</h3>
         <ul id="search-history">
           <!-- User messages will appear here -->
         </ul>
       </aside>
+
       <!-- Main Chat Section -->
       <main class="main-content">
         <!-- Header with a gradient background -->
@@ -43,7 +45,6 @@
             <p>Write a to-do list for a personal project</p>
           </div>
           <div class="prompt-card">
-            
             <i class="fas fa-file-alt prompt-icon"></i>
             <p>Summarise an article in one paragraph</p>
           </div>
@@ -79,6 +80,21 @@
       themeToggle.innerHTML = document.body.classList.contains('dark-mode') 
         ? '<i class="fas fa-sun"></i>' 
         : '<i class="fas fa-moon"></i>';
+    });
+
+    // Mobile sidebar toggle functionality
+    const historySidebar = document.getElementById('history-sidebar');
+    const closeHistory = document.getElementById('close-history');
+    const themeButton = document.getElementById('theme-toggle');
+
+    // Show sidebar on click of history button or icon
+    themeButton.addEventListener('click', () => {
+      historySidebar.classList.toggle('show');
+    });
+
+    // Close the sidebar when the 'X' button is clicked
+    closeHistory.addEventListener('click', () => {
+      historySidebar.classList.remove('show');
     });
   </script>
 </body>

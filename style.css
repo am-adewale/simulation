@@ -34,21 +34,21 @@ body {
   color: #6c63ff;
 }
 
-.fa-moon{
+.fa-moon {
   margin-right: -12px;
   color: rgb(43, 42, 42);
 }
 
-.fa-moon:hover{
+.fa-moon:hover {
   color: black;
 }
 
-.fa-sun{
+.fa-sun {
   margin-right: -12px;
   color: #ccc;
 }
 
-.fa-sun:hover{
+.fa-sun:hover {
   color: #f1eeee;
 }
 
@@ -61,7 +61,7 @@ body {
   background-color: #fff;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* History Sidebar */
@@ -71,6 +71,7 @@ body {
   padding: 25px;
   border-right: 1px solid #e0e0e0;
   overflow-y: auto;
+  position: relative;
 }
 
 .history-box h3 {
@@ -88,7 +89,7 @@ body {
   margin-bottom: 10px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   transition: background-color 0.2s;
   overflow: hidden;
@@ -98,6 +99,39 @@ body {
 
 .history-box ul li:hover {
   background-color: #eef1ff;
+}
+
+/* Mobile history sidebar toggle */
+.history-box {
+  right: -100%; /* Initially hidden on mobile */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 80%;
+  max-width: 300px;
+  transition: right 0.3s ease;
+}
+
+/* Show the sidebar when toggled */
+.history-box.show {
+  right: 0;
+}
+
+/* Close button inside history box */
+.close-history {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.close-history:hover {
+  color: #6c63ff;
 }
 
 /* Main Chat Section */
@@ -148,7 +182,7 @@ body {
   border-radius: 10px;
   padding: 15px;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, background-color 0.2s;
   cursor: pointer;
 }
@@ -186,7 +220,7 @@ body {
   border-radius: 10px;
   max-width: 70%;
   word-wrap: break-word;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
@@ -319,7 +353,7 @@ body.dark-mode .prompt-card {
   color: #ccc;
 }
 
-body.dark-mode p{
+body.dark-mode p {
   color: #ccc;
 }
 
@@ -346,19 +380,98 @@ body.dark-mode .send-btn {
 }
 
 body.dark-mode .send-btn:hover {
-  background-color:  hsl(104, 39.5%, 46%);
+  background-color: hsl(104, 39.5%, 46%);
 }
 
 body.dark-mode .theme-toggle {
   color: #ccc;
 }
 
-body.dark-mode.loader{
+body.dark-mode.loader {
   color: rgb(87, 131, 55);
 }
 
+/* --- Responsive --- */
+@media (max-width: 1200px) {
+  .chatbot-container {
+    flex-direction: column;
+  }
 
-body.dark-mode:focus {
-  border-color: rgb(87, 131, 55);
-  outline: none;
+  .history-box {
+    width: 100%;
+    border-right: none;
+    padding: 15px;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
+  .prompts {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-toggle {
+    font-size: 1.2rem;
+  }
+
+  .history-box {
+    width: 100%;
+    border-right: none;
+    padding: 10px;
+  }
+
+  .main-content {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .header {
+    padding: 15px;
+  }
+
+  .prompts {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+
+  .send-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .theme-toggle {
+    font-size: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .header .tagline {
+    font-size: 0.9rem;
+  }
+
+  .chat-message {
+    padding: 10px 12px;
+  }
+
+  .message-actions button {
+    font-size: 0.9rem;
+  }
+
+  .send-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
 }
