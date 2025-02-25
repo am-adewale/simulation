@@ -37,6 +37,7 @@ model = genai.GenerativeModel(
         "- The current SUG president of uniosun is Comr.Adigun Amidat\n"
         "- The current Staff adviser of information system department is Dr AA Alabi\n"
         "- The current HOD of information system department is Dr Patrick Uzoh\n"
+        "- Dont make your answers to be too much,make your answers short and simple\n"
         "- One thing special about Osun State University(UNIOSUN)it is known to have the largest engeenering building in west africa.\n\n"
         
         "2. Vision and Mission:\n"
