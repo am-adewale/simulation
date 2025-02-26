@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Uniosun AI Chatbot</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- External Styles -->
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Dark Mode Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" title="Toggle Dark Mode">
+      <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="chatbot-container">
+      <!-- History Sidebar -->
+      <aside id="history-sidebar" class="history-box">
+        <button class="close-history" id="close-history">&times;</button>
+        <h3>Search History</h3>
+        <ul id="search-history">
+          <!-- User messages will appear here -->
+        </ul>
+      </aside>
+
+      <!-- Main Chat Section -->
+      <main class="main-content">
+        <!-- Header with a gradient background -->
+        <header class="header">
+          <h1>Welcome, <span class="username">Adewale</span></h1>
+          <p class="tagline">Ask anything about Osun state university.</p>
+        </header>
+
+        <!-- Quick Prompts Section -->
+        <section class="prompts">
+          <div class="prompt-card">
+            <i class="fas fa-tasks prompt-icon"></i>
+            <p>When was Osun state university(UNIOSUN) established</p>
+          </div>
+          <div class="prompt-card">
+            <i class="fas fa-envelope prompt-icon"></i>
+            <p>Write a to-do list for a personal project</p>
+          </div>
+          <div class="prompt-card">
+            <i class="fas fa-file-alt prompt-icon"></i>
+            <p>Summarise an article in one paragraph</p>
+          </div>
+          <div class="prompt-card">
+            <i class="fas fa-robot prompt-icon"></i>
+            <p>Explain how AI works technically</p>
+          </div>
+        </section>
+
+        <!-- Chat Window -->
+        <section id="chat-window" class="chat-window">
+          <!-- Chat messages will be appended here dynamically -->
+        </section>
+
+        <!-- Input Section -->
+        <footer class="input-section">
+          <textarea id="user-input" placeholder="Type your message here..." autofocus></textarea>
+          <button id="submit-btn" class="send-btn" title="Send Message" aria-label="Send message">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <!-- Load main.js as an ES Module -->
+  <script type="module" src="js/main.js"></script>
+  <script>
+    // Dark mode toggle functionality.
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      themeToggle.innerHTML = document.body.classList.contains('dark-mode') 
+        ? '<i class="fas fa-sun"></i>' 
+        : '<i class="fas fa-moon"></i>';
+    });
+
+    // Mobile sidebar toggle functionality
+    const historySidebar = document.getElementById('history-sidebar');
+    const closeHistory = document.getElementById('close-history');
+    const themeButton = document.getElementById('theme-toggle');
+
+    // Show sidebar on click of history button or icon
+    themeButton.addEventListener('click', () => {
+      historySidebar.classList.toggle('show');
+    });
+
+    // Close the sidebar when the 'X' button is clicked
+    closeHistory.addEventListener('click', () => {
+      historySidebar.classList.remove('show');
+    });
+  </script>
+</body>
+</html>
